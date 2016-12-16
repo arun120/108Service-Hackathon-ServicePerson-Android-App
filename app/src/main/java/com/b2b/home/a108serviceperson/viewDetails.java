@@ -78,9 +78,15 @@ public class viewDetails extends android.support.v4.app.Fragment {
         mProgressDialog=new ProgressDialog(myContext);
         des.setText(ShowCase.c.getDescription());
         num.setText(ShowCase.c.getNo_ppl_affected());
-
+        final Button spot=(Button) getActivity().findViewById(R.id.spot);
+        spot.setVisibility(View.INVISIBLE);
         Button req=(Button) getActivity().findViewById(R.id.request);
+        spot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +122,8 @@ public class viewDetails extends android.support.v4.app.Fragment {
                     protected void onPostExecute(String res) {
                         super.onPostExecute(res);
                         Toast.makeText(getActivity().getApplicationContext(),res,Toast.LENGTH_SHORT).show();
-
+                        if(res.contains("Procced"))
+                        spot.setVisibility(View.VISIBLE);
 
                     }
 

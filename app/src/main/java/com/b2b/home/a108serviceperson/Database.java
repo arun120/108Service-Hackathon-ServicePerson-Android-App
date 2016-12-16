@@ -3,6 +3,8 @@ package com.b2b.home.a108serviceperson;
 import android.os.Environment;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -256,32 +258,29 @@ public class Database {
     }
 
 
-    public static void  updatedriverLocation(Driver_Location d){
-        Dbdetails db=new Dbdetails();
-        String driver_id=null;
-        Connection conn=null;
-        Statement stmt=null;
+    public static String  updatedriverLocation(Driver_Location d){
+        HttpURLConnection connection = null;
+        String sUrl=Dbdetails.getServerpath()+"updateLoc?driverid="+d.getDriver_id()+
+                "&lat="+d.getLatitude()+"&lon="+d.getLongitude();
+        Log.i("Url",sUrl);
+        String s="";
+        URL url = null;
         try {
-            Class.forName(db.getDriver());
-            conn= DriverManager.getConnection(db.getUrl(),db.getUserName(),db.getPass());
-            stmt=conn.createStatement();
-            stmt.executeUpdate("update  driver_location set latitude='"+d.getLatitude()+"', longitude='"+d.getLongitude()+"' where driver_id like '"+d.getDriver_id()+"'");
+            url = new URL(sUrl);
 
+            connection = (HttpURLConnection) url.openConnection();
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            char c;
+            while ((c = (char) input.read()) != (char) -1)
+                s += c;
+
+            // Log.i("Server return",s);
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            try {
-                if(stmt!=null)
-                    stmt.close();
-                if(conn!=null)
-
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
-        return ;
+        return s;
     }
 
 

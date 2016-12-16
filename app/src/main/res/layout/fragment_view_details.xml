@@ -47,5 +47,12 @@
             android:id="@+id/request"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="80dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Spot Reached"
+            android:id="@+id/spot"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </FrameLayout>
