@@ -5,7 +5,76 @@
     tools:context="com.b2b.home.a108serviceperson.viewDetails">
 
     <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/search"
+        android:visibility="gone"
+        android:background="#383055">
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/clock1"
+            tools:ignore="ContentDescription" />
+
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/min_rotate">
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:id="@+id/minutes"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/clock_min"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/hour_rotate">
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:id="@+id/hour"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/clock_small"/>
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:id="@+id/seconds"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/clock_sec"/>
+        <Button
+            android:text="Cancel Request"
+            android:textColor="#fffff2"
+            android:background="@drawable/btn_driver"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="15dp"
+            android:id="@+id/cancel_request" />
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/show_map1">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -55,4 +124,6 @@
             android:id="@+id/spot"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
+            </RelativeLayout>
+    </RelativeLayout>
 </FrameLayout>

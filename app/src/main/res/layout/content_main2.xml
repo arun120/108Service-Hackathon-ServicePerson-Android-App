@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.b2b.home.a108serviceperson.Main2Activity"
+    tools:showIn="@layout/app_bar_main2">
+
+    <RelativeLayout
+        android:layout_width="205dp"
+        android:layout_height="100dp"
+        android:layout_toLeftOf="@+id/task"
+        android:layout_alignParentLeft="true"
+        android:background="#4fd2c2"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:text="24"
+            android:textSize="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/set1" />
+        <TextView
+            android:text="Task Completed"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/set11" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        android:id="@+id/task"
+        android:layout_alignParentRight="true"
+        android:background="#d667cd">
+        <TextView
+            android:text="0"
+            android:textSize="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/set2" />
+        <TextView
+            android:text="Task Pending"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/set22" />
+    </RelativeLayout>
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@+id/task"
+        android:background="#f8f8f8"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="80dp"
+        android:id="@+id/his"
+        android:visibility="gone"
+        android:background="#fff">
+
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/history_circle1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="21dp"
+            />
+
+        <TextView
+            android:text="New Request"
+            android:textColor="#212121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/namm"/>
+        <TextView
+            android:text="Pending"
+            android:textColor="#80212121"
+            android:layout_below="@+id/namm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="5dp"/>
+
+        <RelativeLayout
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/history_circle3"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/noti"
+            android:src="@drawable/notification"
+            android:scaleType="center" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="Take Request"
+            android:id="@+id/takerequest"
+            android:textColor="#42ccbd"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/his"
+        android:layout_marginTop="5dp"
+        android:layout_height="80dp"
+        android:id="@+id/his1"
+        android:background="#fff">
+
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/history_circle2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="21dp"
+            />
+
+        <TextView
+            android:text="Task Completed"
+            android:textColor="#212121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/namma"/>
+        <TextView
+            android:text="Admitted"
+            android:textColor="#80212121"
+            android:layout_below="@+id/namma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pm"
+            android:id="@+id/hi"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.30"
+            android:textColor="#212121"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/hi"
+            android:layout_marginTop="15dp"
+
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="History"
+            android:id="@+id/takehistory1"
+            android:textColor="#ffd600"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/his1"
+        android:layout_marginTop="1dp"
+        android:layout_height="80dp"
+        android:id="@+id/his2"
+        android:background="#fff">
+
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/history_circle"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="21dp"
+            />
+
+        <TextView
+            android:text="Task Completed"
+            android:textColor="#212121"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/namma1"/>
+        <TextView
+            android:text="Admitted"
+            android:textColor="#80212121"
+            android:layout_below="@+id/namma1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pm"
+            android:id="@+id/hi1"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.10"
+            android:textColor="#212121"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/hi1"
+            android:layout_marginTop="15dp"
+
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="History"
+            android:id="@+id/takehistory"
+            android:textColor="#ffd600"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+    </RelativeLayout>
+
+            </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+        </RelativeLayout>

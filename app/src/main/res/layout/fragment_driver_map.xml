@@ -2,16 +2,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.b2b.home.a108serviceperson.DriverMap">
 
     <!-- TODO: Update blank fragment layout -->
 
 
-    <fragment
-        android:id="@+id/map2"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/show_map">
+            <fragment
+                android:id="@+id/map2"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:background="#f4f4f4"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:id="@+id/more_driver_details">-->
+                <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:id="@+id/map_driver_img"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:src="@drawable/wallpaper"/>-->
 
+
+
+                <!--<TextView-->
+                    <!--android:text="Arun Selvan - Driver"-->
+                    <!--android:textColor="#212121"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignLeft="@+id/map_driver_img"-->
+                    <!--android:layout_marginLeft="65dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:id="@+id/map_driver_name" />-->
+
+                <!--<TextView-->
+                    <!--android:text="More Deatils"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:layout_below="@+id/map_driver_name"-->
+                    <!--android:layout_alignLeft="@+id/map_driver_img"-->
+                    <!--android:layout_marginLeft="65dp"-->
+                    <!--android:id="@+id/textView11" />-->
+            <!--</RelativeLayout>-->
+        </RelativeLayout>
+
+</FrameLayout>

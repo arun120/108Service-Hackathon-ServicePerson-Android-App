@@ -5,10 +5,14 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONObject;
+
+import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -331,6 +335,7 @@ public class Database {
                 ccase.setLongitude(rs.getString("longitude"));
                 ccase.setNo_ppl_affected(rs.getString("no_ppl_affected"));
                 ccase.setDescription(rs.getString("description"));
+                ccase.setType(rs.getString("type"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -404,4 +409,62 @@ public class Database {
 
         return s;
     }
+
+
+    public static  int updateLog(Case_Log c){
+
+        Dbdetails db=new Dbdetails();
+        int update=0;
+        Connection conn=null;
+        Statement stmt=null;
+        try {
+            Class.forName(db.getDriver());
+            conn= DriverManager.getConnection(db.getUrl(),db.getUserName(),db.getPass());
+            stmt=conn.createStatement();
+            update=stmt.executeUpdate("update case_log set status='Stopped' where case_id like '"+c.getCase_id()+"'");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if(stmt!=null)
+                    stmt.close();
+                if(conn!=null)
+
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return update;
+    }
+
+public static String getHospitalLatLng(String loc){
+    URL url = null;
+    String lat="",lng="";
+    try {
+        url = new URL("https://maps.googleapis.com/maps/api/place/search/json?radius=1000&types=hospital&sensor=false&location="+loc+"&key="+"AIzaSyC8Ft1GjOsjisZnobkX7JCz2o98kl-bius");
+
+
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.connect();
+    InputStream input = connection.getInputStream();
+    char c;
+
+        String s = new String();
+    while ((c = (char) input.read()) != (char) -1)
+        s += c;
+    // System.out.println(s);
+    JSONObject aa=new JSONObject(s);
+    //String duration=aa.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0).getJSONObject("duration").getString("text");
+     lng =(String) aa.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").get("lng").toString();
+     lat =(String) aa.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").get("lat").toString();
+        Log.i("getHospital",lat+","+lng);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return lat+","+lng;
+}
 }

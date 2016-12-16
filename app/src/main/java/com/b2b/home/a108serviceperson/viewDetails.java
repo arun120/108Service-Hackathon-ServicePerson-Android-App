@@ -5,24 +5,38 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.TextViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.Calendar;
 
 
 public class viewDetails extends android.support.v4.app.Fragment {
@@ -32,6 +46,7 @@ public class viewDetails extends android.support.v4.app.Fragment {
     private static final String ARG_PARAM2 = "param2";
     private FragmentActivity myContext;
     SharedPreferences sharedPreferences;
+    Boolean activated=false;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -78,22 +93,103 @@ public class viewDetails extends android.support.v4.app.Fragment {
         mProgressDialog=new ProgressDialog(myContext);
         des.setText(ShowCase.c.getDescription());
         num.setText(ShowCase.c.getNo_ppl_affected());
+        long time= System.currentTimeMillis();
+        Calendar cal=Calendar.getInstance();
+        cal.setTimeInMillis(time);
+        int hr=cal.get(Calendar.HOUR);
+        int min=cal.get(Calendar.MINUTE);
+        int sec=cal.get(Calendar.SECOND);
+        Log.i("Hours Minutes",String.valueOf(hr)+','+String.valueOf(min)+','+String.valueOf(sec));
+        ImageView hour= (ImageView) getActivity().findViewById(R.id.hour);
+        ImageView mins= (ImageView) getActivity().findViewById(R.id.minutes);
+        final ImageView secs= (ImageView) getActivity().findViewById(R.id.seconds);
+        Bitmap hours=rotate(R.drawable.clock_small,30*hr);
+        Bitmap minutes=rotate(R.drawable.clock_min,6*min);
+        final RelativeLayout rl1,rl2,rl3,rl4;
+        rl1= (RelativeLayout) getActivity().findViewById(R.id.hour_rotate);
+        rl2= (RelativeLayout) getActivity().findViewById(R.id.min_rotate);
+        rl3= (RelativeLayout) getActivity().findViewById(R.id.show_map1);
+        rl4= (RelativeLayout) getActivity().findViewById(R.id.search);
+        hour.setImageBitmap(hours);
+        mins.setImageBitmap(minutes);
+        final Animation anima= AnimationUtils.loadAnimation(getActivity(), R.anim.rotates);
+        anima.setInterpolator(new LinearInterpolator());
+        Animation animah= AnimationUtils.loadAnimation(getActivity(), R.anim.rotateh);
+        anima.setInterpolator(new LinearInterpolator());
+        rl1.startAnimation(animah);
+        Animation animam= AnimationUtils.loadAnimation(getActivity(), R.anim.rotatem);
+        anima.setInterpolator(new LinearInterpolator());
+        rl2.startAnimation(animam);
+
         final Button spot=(Button) getActivity().findViewById(R.id.spot);
+        if(!activated)
         spot.setVisibility(View.INVISIBLE);
         Button req=(Button) getActivity().findViewById(R.id.request);
         spot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
+                new AsyncTask<String,Void,String>(){
+                 String loc ;
+                    @Override
+                    protected void onPreExecute() {
+                        super.onPreExecute();
+
+                        if(ShowCase.c.getType().equals("Ambulance"))
+                            mProgressDialog.setMessage("Finding Hospital .....");
+                        else
+                            mProgressDialog.setMessage("Closing Request.....");
+
+                        mProgressDialog.setIndeterminate(true);
+                        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        mProgressDialog.show();
+                    }
+
+                    @Override
+                    protected void onPostExecute(String res) {
+                        super.onPostExecute(res);
+
+                        mProgressDialog.dismiss();
+
+                        Toast.makeText(getActivity().getApplicationContext(),"Service Completed",Toast.LENGTH_SHORT).show();
+
+                        if(ShowCase.c.getType().equals("Ambulance")){
+                            Log.i("Intent","Called"+loc);
+                            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                    Uri.parse("http://maps.google.com/maps?saddr="+"My+Location"+"&daddr="+loc));
+                            startActivity(intent);
+                        }
+
+
+                    }
+
+                    @Override
+                    protected String doInBackground(String... params) {
+                        Case_Log caseLog=new Case_Log();
+                        caseLog.setCase_id(ShowCase.c.getCase_id());
+                        caseLog.setStatus("Stopped");
+                        Database.updateLog(caseLog);
+                        if(ShowCase.c.getType().equals("Ambulance"))
+                           loc = Database.getHospitalLatLng(ShowCase.c.getLatitude()+","+ShowCase.c.getLongitude());
+                            return null;
+
+                    }
+                }.execute();
             }
         });
         req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                rl4.setVisibility(View.VISIBLE);
+                rl3.setVisibility(View.GONE);
+                secs.startAnimation(anima);
+
                 Case_Link link=new Case_Link();
                 link.setDriver_id(sharedPreferences.getString("user",""));
                 link.setCase_id(ShowCase.c.getCase_id());
+
 
                 new AsyncTask<Case_Link,Integer,String>(){
                     @Override
@@ -114,7 +210,7 @@ public class viewDetails extends android.support.v4.app.Fragment {
                     protected void onProgressUpdate(Integer... values) {
                         super.onProgressUpdate(values);
 
-                        Toast.makeText(getActivity().getApplicationContext(),"Time out: "+String.valueOf(values[0]),Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(getActivity().getApplicationContext(),"Time out: "+String.valueOf(values[0]),Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -122,8 +218,11 @@ public class viewDetails extends android.support.v4.app.Fragment {
                     protected void onPostExecute(String res) {
                         super.onPostExecute(res);
                         Toast.makeText(getActivity().getApplicationContext(),res,Toast.LENGTH_SHORT).show();
-                        if(res.contains("Procced"))
+                        if(res.contains("Procced")){
                         spot.setVisibility(View.VISIBLE);
+                        activated=true;}
+                        rl4.setVisibility(View.GONE);
+                        rl3.setVisibility(View.VISIBLE);
 
                     }
 
@@ -176,6 +275,16 @@ public class viewDetails extends android.support.v4.app.Fragment {
 
 
 
+
+
+
+    }
+
+    Bitmap rotate(int id,float angle){
+        Matrix matrix=new Matrix();
+        matrix.postRotate(angle);
+        Bitmap src= BitmapFactory.decodeResource(getResources(),id);
+        return Bitmap.createBitmap(src,0,0,src.getWidth(),src.getHeight(),matrix,true);
     }
 
     @Override

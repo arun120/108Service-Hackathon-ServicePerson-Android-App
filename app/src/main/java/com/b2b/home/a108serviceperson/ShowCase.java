@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 public class ShowCase extends AppCompatActivity {
@@ -20,6 +21,8 @@ public class ShowCase extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mProgressDialog=new ProgressDialog(this);
         setContentView(R.layout.activity_show_case);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         String id=getIntent().getExtras().getString("case_id");
 
         new AsyncTask<String,Void,String>(){

@@ -68,7 +68,18 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ShowCase"></activity>
+        <activity android:name=".ShowCase"
+            android:theme="@style/AppTheme.Driver"/>
+        <activity android:name=".Clock" />
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Profile"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".History"></activity>
     </application>
 
 </manifest>

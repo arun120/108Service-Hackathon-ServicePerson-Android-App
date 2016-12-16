@@ -6,10 +6,14 @@ package com.b2b.home.a108serviceperson;
     import android.content.Context;
     import android.content.Intent;
     import android.content.pm.PackageManager;
+    import android.graphics.Bitmap;
+    import android.graphics.BitmapFactory;
+    import android.graphics.Matrix;
     import android.location.Location;
     import android.net.Uri;
     import android.os.AsyncTask;
     import android.os.Bundle;
+    import android.os.Handler;
     import android.support.v4.app.ActivityCompat;
     import android.support.v4.app.Fragment;
     import android.support.v4.app.FragmentActivity;
@@ -17,8 +21,16 @@ package com.b2b.home.a108serviceperson;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
+    import android.view.animation.Animation;
+    import android.view.animation.AnimationUtils;
+    import android.view.animation.LinearInterpolator;
+    import android.widget.Button;
+    import android.widget.ImageView;
+    import android.widget.RelativeLayout;
     import android.widget.Toast;
 
+    import com.daimajia.androidanimations.library.Techniques;
+    import com.daimajia.androidanimations.library.YoYo;
     import com.google.android.gms.maps.CameraUpdateFactory;
     import com.google.android.gms.maps.GoogleMap;
     import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,8 +38,10 @@ package com.b2b.home.a108serviceperson;
     import com.google.android.gms.maps.model.LatLng;
     import com.google.android.gms.maps.model.MarkerOptions;
 
+    import java.util.Calendar;
 
-    public class DriverMap extends android.support.v4.app.Fragment implements OnMapReadyCallback {
+
+public class DriverMap extends android.support.v4.app.Fragment implements OnMapReadyCallback {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private static final String ARG_PARAM1 = "param1";
@@ -90,20 +104,20 @@ package com.b2b.home.a108serviceperson;
 
 
         }
-
+    static Button takerequest;
+    Button cancelrequest;
         @Override
         public void onStart() {
             super.onStart();
-            mProgressDialog=new ProgressDialog(getActivity());
+            mProgressDialog = new ProgressDialog(getActivity());
             SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map2);
             mapFragment.getMapAsync(this);
-
         }
-
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
-
+            GPSTracker gps=new GPSTracker(getContext());
+            loc=new LatLng(gps.getLatitude(), gps.getLongitude());
             if (ActivityCompat.checkSelfPermission(myContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(myContext, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -123,7 +137,7 @@ package com.b2b.home.a108serviceperson;
                     LatLng marker_pos=marker.getPosition();
 
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                            Uri.parse("http://maps.google.com/maps?saddr="+loc.latitude+","+loc.longitude+"&daddr="+marker_pos.latitude+","+marker_pos.longitude));
+                            Uri.parse("http://maps.google.com/maps?saddr="+"My+Location"+"&daddr="+marker_pos.latitude+","+marker_pos.longitude));
                     startActivity(intent);
                     return true;
                 }
