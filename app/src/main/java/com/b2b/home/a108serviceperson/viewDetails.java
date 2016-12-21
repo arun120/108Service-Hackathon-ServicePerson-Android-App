@@ -84,15 +84,23 @@ public class viewDetails extends android.support.v4.app.Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        TextView des=(TextView) getActivity().findViewById(R.id.description);
+        TextView num=(TextView) getActivity().findViewById(R.id.numaffected);
+        mProgressDialog=new ProgressDialog(myContext);
+        if(ShowCase.c!=null) {
+            des.setText(ShowCase.c.getDescription());
+            num.setText(ShowCase.c.getNo_ppl_affected());
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
         sharedPreferences= getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
-        TextView des=(TextView) getActivity().findViewById(R.id.description);
-        TextView num=(TextView) getActivity().findViewById(R.id.numaffected);
-        mProgressDialog=new ProgressDialog(myContext);
-        des.setText(ShowCase.c.getDescription());
-        num.setText(ShowCase.c.getNo_ppl_affected());
         long time= System.currentTimeMillis();
         Calendar cal=Calendar.getInstance();
         cal.setTimeInMillis(time);
@@ -105,7 +113,9 @@ public class viewDetails extends android.support.v4.app.Fragment {
         final ImageView secs= (ImageView) getActivity().findViewById(R.id.seconds);
         Bitmap hours=rotate(R.drawable.clock_small,30*hr);
         Bitmap minutes=rotate(R.drawable.clock_min,6*min);
-        final RelativeLayout rl1,rl2,rl3,rl4;
+        final RelativeLayout rl1,rl2,rl3,rl4,rl5,rl6;
+        rl5=(RelativeLayout) getActivity().findViewById(R.id.his2);
+        rl6=(RelativeLayout) getActivity().findViewById(R.id.his3);
         rl1= (RelativeLayout) getActivity().findViewById(R.id.hour_rotate);
         rl2= (RelativeLayout) getActivity().findViewById(R.id.min_rotate);
         rl3= (RelativeLayout) getActivity().findViewById(R.id.show_map1);
@@ -220,9 +230,11 @@ public class viewDetails extends android.support.v4.app.Fragment {
                         Toast.makeText(getActivity().getApplicationContext(),res,Toast.LENGTH_SHORT).show();
                         if(res.contains("Procced")){
                         spot.setVisibility(View.VISIBLE);
-                        activated=true;}
+                            rl6.setVisibility(View.VISIBLE);
+                            activated=true;}
                         rl4.setVisibility(View.GONE);
                         rl3.setVisibility(View.VISIBLE);
+                        rl5.setVisibility(View.VISIBLE);
 
                     }
 

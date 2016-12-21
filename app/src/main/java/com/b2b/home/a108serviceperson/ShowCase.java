@@ -46,6 +46,17 @@ public class ShowCase extends AppCompatActivity {
 
 
 
+                ViewPager mViewPager;
+                mViewPager=(ViewPager) findViewById(R.id.pager);
+
+
+                MyPagerAdapter adapterViewPager;
+                adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(),null,ShowCase.this);
+                mViewPager.setAdapter(adapterViewPager);
+
+                TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+                tabLayout.setupWithViewPager(mViewPager);
+
 
             }
 
@@ -55,19 +66,8 @@ public class ShowCase extends AppCompatActivity {
                 return params[0];
 
             }
-        }.execute(id);
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,id);
 
-
-        ViewPager mViewPager;
-        mViewPager=(ViewPager) findViewById(R.id.pager);
-
-
-        MyPagerAdapter adapterViewPager;
-        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager(),null,ShowCase.this);
-        mViewPager.setAdapter(adapterViewPager);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(mViewPager);
 
     }
 

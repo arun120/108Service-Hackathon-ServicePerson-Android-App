@@ -7,7 +7,8 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#383055">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -75,55 +76,195 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/show_map1">
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            android:text="Incident Details"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
-            android:id="@+id/textView3"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="31dp"
+            android:id="@+id/textView8" />
 
         <TextView
-            android:layout_width="256dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_below="@+id/textView8"
+            android:layout_marginLeft="10dp"
+            android:text="Incident Information"
+            android:id="@+id/description1"
+            android:textColor="#f4f4f4"
+            android:textSize="15dp"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_below="@+id/description1"
+            android:layout_marginLeft="10dp"
+            android:text="Incident Description"
             android:id="@+id/description"
-            android:layout_gravity="center_horizontal" />
+            android:textColor="#f4f4f4"
+            android:textSize="15dp"
+            android:layout_marginTop="15dp"
+            />
+
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/textView8"
+            android:src="@drawable/shapes"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="No of Affected"
+            android:textColor="#fff"
             android:id="@+id/textView4"
+            android:layout_below="@+id/description"
             android:layout_marginTop="50dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#f4f4f4"
+            android:text="6"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/numaffected"
-            android:layout_gravity="center_horizontal" />
+            android:layout_below="@+id/description"
+            android:layout_toRightOf="@+id/textView4" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/numaffected"
+            android:layout_marginTop="1dp"
+            android:id="@+id/his2"
+            android:visibility="gone"
+            android:layout_height="80dp"
+            android:background="#fff">
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="#42ccbd"/>
+
+            <TextView
+                android:text="Request Taken"
+                android:textColor="#212121"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/namm"/>
+            <TextView
+                android:text="Status: Processing"
+                android:textColor="#80212121"
+                android:layout_below="@+id/namm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="5dp"/>
+
+            <RelativeLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/history_circle3"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/noti"
+                    android:src="@drawable/notification"
+                    android:scaleType="center" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/his2"
+            android:layout_marginTop="1dp"
+            android:id="@+id/his3"
+            android:visibility="gone"
+            android:layout_height="80dp"
+            android:background="#fff">
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="#42ccbd"/>
+
+            <TextView
+                android:text="Reached Destination"
+                android:textColor="#212121"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/namm1"/>
+            <TextView
+                android:text="Status: Complete"
+                android:textColor="#80212121"
+                android:layout_below="@+id/namm1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="5dp"/>
+
+            <RelativeLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/history_circle3"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/noti1"
+                    android:src="@drawable/notification"
+                    android:scaleType="center" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:text="Spot Reached"
+                android:id="@+id/spot"
+                android:textColor="#42ccbd"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        </RelativeLayout>
+
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Take Request"
+            android:layout_alignParentBottom="true"
             android:id="@+id/request"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="80dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Spot Reached"
-            android:id="@+id/spot"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
+    </RelativeLayout>
             </RelativeLayout>
     </RelativeLayout>
 </FrameLayout>
